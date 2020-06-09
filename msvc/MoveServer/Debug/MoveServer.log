@@ -1,0 +1,34 @@
+﻿  MoveServer.cpp
+  NewtonDownMethod.cpp
+  scurve.cpp
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(162): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(170): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(181): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(189): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(197): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(220): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(232): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(242): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(252): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(306): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(314): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(323): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(332): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(340): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(348): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(356): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(372): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(382): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(391): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(399): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(407): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(415): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(437): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(449): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(459): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(469): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(112): warning C4101: “T5”: 未引用的局部变量
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(112): warning C4101: “T7”: 未引用的局部变量
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\moveserver\scurve.cpp(112): warning C4101: “T6”: 未引用的局部变量
+  正在生成代码...
+  MoveServer.vcxproj -> C:\Users\zkliang\Desktop\20200305冗余驱动弹性并联机构\ParallelControl - Motor\msvc\MoveServer\..\..\bin\MoveServer.exe

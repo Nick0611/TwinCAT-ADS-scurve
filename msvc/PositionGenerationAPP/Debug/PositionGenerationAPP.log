@@ -1,0 +1,4 @@
+﻿  PositionGenerationAPP.cpp
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\positiongenerationapp\源文件\positiongenerationapp.cpp(244): warning C4101: “mode_flag”: 未引用的局部变量
+c:\users\zkliang\desktop\20200305冗余驱动弹性并联机构\parallelcontrol - motor\msvc\positiongenerationapp\源文件\positiongenerationapp.cpp(243): warning C4101: “i”: 未引用的局部变量
+  PositionGenerationAPP.vcxproj -> C:\Users\zkliang\Desktop\20200305冗余驱动弹性并联机构\ParallelControl - Motor\msvc\PositionGenerationAPP\..\..\bin\PositionGenerationAPP.exe
