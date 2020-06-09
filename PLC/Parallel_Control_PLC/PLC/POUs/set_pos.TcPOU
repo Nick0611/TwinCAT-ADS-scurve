@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <POU Name="set_pos" Id="{97549c07-bd89-41b0-baec-8d1d12a907c4}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM set_pos
+VAR
+	MC_SetPosition1: MC_SetPosition;
+	MC_SetPosition2: MC_SetPosition;
+	MC_SetPosition3: MC_SetPosition;
+	MC_SetPosition4: MC_SetPosition;
+	MC_SetPosition5: MC_SetPosition;
+	MC_SetPosition6: MC_SetPosition;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[MC_SetPosition1(
+	Axis:= axis.Axis1, 
+	Execute:= , 
+	Position:= , 
+	Mode:= , 
+	Options:= , 
+	Done=> , 
+	Busy=> , 
+	Error=> , 
+	ErrorID=> );
+
+MC_SetPosition2(
+	Axis:= axis.Axis2, 
+	Execute:= , 
+	Position:= , 
+	Mode:= , 
+	Options:= , 
+	Done=> , 
+	Busy=> , 
+	Error=> , 
+	ErrorID=> );
+	
+MC_SetPosition3(
+	Axis:= axis.Axis3, 
+	Execute:= , 
+	Position:= , 
+	Mode:= , 
+	Options:= , 
+	Done=> , 
+	Busy=> , 
+	Error=> , 
+	ErrorID=> );
+
+MC_SetPosition4(
+	Axis:= axis.Axis4, 
+	Execute:= , 
+	Position:= , 
+	Mode:= , 
+	Options:= , 
+	Done=> , 
+	Busy=> , 
+	Error=> , 
+	ErrorID=> );
+	
+MC_SetPosition5(
+	Axis:= axis.Axis5, 
+	Execute:= , 
+	Position:= , 
+	Mode:= , 
+	Options:= , 
+	Done=> , 
+	Busy=> , 
+	Error=> , 
+	ErrorID=> );
+
+MC_SetPosition6(
+	Axis:= axis.Axis6, 
+	Execute:= , 
+	Position:= , 
+	Mode:= , 
+	Options:= , 
+	Done=> , 
+	Busy=> , 
+	Error=> , 
+	ErrorID=> );]]></ST>
+    </Implementation>
+    <LineIds Name="set_pos">
+      <LineId Id="7" Count="8" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="20" Count="8" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="31" Count="8" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="41" Count="8" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="63" Count="19" />
+      <LineId Id="62" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

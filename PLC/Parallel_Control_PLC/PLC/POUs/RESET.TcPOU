@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <POU Name="RESET" Id="{7fe5a967-7db8-423e-8b37-19956935df0b}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM RESET
+VAR
+	MC_Reset1 : MC_Reset;
+	MC_Reset2 : MC_Reset;
+	MC_Reset3 : MC_Reset;
+	MC_Reset4 : MC_Reset;
+	MC_Reset5 : MC_Reset;
+	MC_Reset6 : MC_Reset;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[MC_Reset1(
+	Axis:= AXIS.Axis1, 
+	Execute:= RESET_Execute1, 
+	Done=> , 
+	Busy=> , 
+	Error=> , 
+	ErrorID=> );
+	
+	MC_Reset2(
+	Axis:= AXIS.Axis2, 
+	Execute:= RESET_Execute2, 
+	Done=> , 
+	Busy=> , 
+	Error=> , 
+	ErrorID=> );
+	
+	MC_Reset3(
+	Axis:= AXIS.Axis3, 
+	Execute:= RESET_Execute3, 
+	Done=> , 
+	Busy=> , 
+	Error=> , 
+	ErrorID=> );
+	
+	MC_Reset4(
+	Axis:= AXIS.Axis4, 
+	Execute:= RESET_Execute4, 
+	Done=> , 
+	Busy=> , 
+	Error=> , 
+	ErrorID=> );
+	
+	MC_Reset5(
+	Axis:= AXIS.Axis5, 
+	Execute:= RESET_Execute5, 
+	Done=> , 
+	Busy=> , 
+	Error=> , 
+	ErrorID=> );
+	
+	MC_Reset6(
+	Axis:= AXIS.Axis6, 
+	Execute:= RESET_Execute6, 
+	Done=> , 
+	Busy=> , 
+	Error=> , 
+	ErrorID=> );]]></ST>
+    </Implementation>
+    <LineIds Name="RESET">
+      <LineId Id="6" Count="29" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="47" Count="13" />
+      <LineId Id="46" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <DUT Name="CASE_STATE" Id="{4ecba219-8840-48bb-8386-b81cfb600816}">
+    <Declaration><![CDATA[
+TYPE CASE_STATE :
+(
+	ENUM_INIT_0 :=0,
+	ENUM_POWER,
+	ENUM_INIT,
+	ENUM_SET_POSITION_GENERATION,
+	ENUM_ERROR,
+	ENUM_RESET
+)INT;
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

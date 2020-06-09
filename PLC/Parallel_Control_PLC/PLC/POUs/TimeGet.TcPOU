@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <POU Name="TimeGet" Id="{c59476ad-6469-4aa9-ab3c-361713477fde}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM TimeGet
+VAR
+	NT_GetTime: NT_GetTime;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[NT_GetTime(
+	NETID:= , 
+	START:= , 
+	TMOUT:= , 
+	BUSY=> , 
+	ERR=> , 
+	ERRID=> , 
+	TIMESTR=> );]]></ST>
+    </Implementation>
+    <LineIds Name="TimeGet">
+      <LineId Id="7" Count="6" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

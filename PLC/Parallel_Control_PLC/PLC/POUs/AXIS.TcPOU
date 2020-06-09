@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <POU Name="AXIS" Id="{8315ae65-fa76-455a-aa9a-9aba0bcc348d}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM AXIS
+VAR
+	Axis1: AXIS_REF;
+	Axis2: AXIS_REF;
+	Axis3: AXIS_REF;
+	Axis4: AXIS_REF;
+	Axis5: AXIS_REF;
+	Axis6: AXIS_REF;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[Axis1(
+	PlcToNc:= , 
+	NcToPlc=> , 
+	ADS=> , 
+	Status=> , 
+	DriveAddress:= );
+	
+Axis2(
+	PlcToNc:= , 
+	NcToPlc=> , 
+	ADS=> , 
+	Status=> , 
+	DriveAddress:= );
+	
+Axis3(
+	PlcToNc:= , 
+	NcToPlc=> , 
+	ADS=> , 
+	Status=> , 
+	DriveAddress:= );
+	
+Axis4(
+	PlcToNc:= , 
+	NcToPlc=> , 
+	ADS=> , 
+	Status=> , 
+	DriveAddress:= );
+
+Axis5(
+	PlcToNc:= , 
+	NcToPlc=> , 
+	ADS=> , 
+	Status=> , 
+	DriveAddress:= );
+	
+Axis6(
+	PlcToNc:= , 
+	NcToPlc=> , 
+	ADS=> , 
+	Status=> , 
+	DriveAddress:= );]]></ST>
+    </Implementation>
+    <LineIds Name="AXIS">
+      <LineId Id="10" Count="4" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="17" Count="4" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="24" Count="3" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="30" Count="3" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="43" Count="4" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="64" Count="0" />
+      <LineId Id="60" Count="3" />
+      <LineId Id="58" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

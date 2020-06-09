@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <POU Name="SetPointGeneration" Id="{aaef7804-6ca5-47cb-8926-8de38993efe2}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM SetPointGeneration
+VAR
+	
+	CASE_STATE1: CASE_STATE;
+	
+	MC_ExtSetPointGenEnable1: MC_ExtSetPointGenEnable;
+	MC_ExtSetPointGenEnable2: MC_ExtSetPointGenEnable;
+	MC_ExtSetPointGenEnable3: MC_ExtSetPointGenEnable;
+	MC_ExtSetPointGenEnable4: MC_ExtSetPointGenEnable;
+	
+	MC_ExtSetPointGenDisable1: MC_ExtSetPointGenDisable;
+	MC_ExtSetPointGenDisable2: MC_ExtSetPointGenDisable;
+	MC_ExtSetPointGenDisable3: MC_ExtSetPointGenDisable;
+	MC_ExtSetPointGenDisable4: MC_ExtSetPointGenDisable;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[AXIS();
+
+
+
+MC_ExtSetPointGenEnable1(
+	Axis:= AXIS.Axis1, 
+	Execute:= , 
+	Position:= , 
+	PositionType:= , 
+	Done=> , 
+	Busy=> , 
+	Error=> , 
+	ErrorID=> , 
+	Enabled=> );
+	
+MC_ExtSetPointGenEnable2(
+	Axis:= AXIS.Axis2, 
+	Execute:= , 
+	Position:= , 
+	PositionType:= , 
+	Done=> , 
+	Busy=> , 
+	Error=> , 
+	ErrorID=> , 
+	Enabled=> );
+	
+MC_ExtSetPointGenEnable3(
+	Axis:= AXIS.Axis3, 
+	Execute:= , 
+	Position:= , 
+	PositionType:= , 
+	Done=> , 
+	Busy=> , 
+	Error=> , 
+	ErrorID=> , 
+	Enabled=> );
+	
+MC_ExtSetPointGenEnable4(
+	Axis:= AXIS.Axis4, 
+	Execute:= , 
+	Position:= , 
+	PositionType:= , 
+	Done=> , 
+	Busy=> , 
+	Error=> , 
+	ErrorID=> , 
+	Enabled=> );
+	
+	MC_ExtSetPointGenDisable1(
+	Axis:= AXIS.Axis1, 
+	Execute:= , 
+	Done=> , 
+	Busy=> , 
+	Error=> , 
+	ErrorID=> , 
+	Enabled=> );
+	
+	MC_ExtSetPointGenDisable2(
+	Axis:= AXIS.Axis2, 
+	Execute:= , 
+	Done=> , 
+	Busy=> , 
+	Error=> , 
+	ErrorID=> , 
+	Enabled=> );
+	
+	MC_ExtSetPointGenDisable3(
+	Axis:= AXIS.Axis3, 
+	Execute:= , 
+	Done=> , 
+	Busy=> , 
+	Error=> , 
+	ErrorID=> , 
+	Enabled=> );
+	
+	MC_ExtSetPointGenDisable4(
+	Axis:= AXIS.Axis4, 
+	Execute:= , 
+	Done=> , 
+	Busy=> , 
+	Error=> , 
+	ErrorID=> , 
+	Enabled=> );
+
+	
+		
+	
+//	ENUM_ERROR:
+//		MC_ExtSetPointGenEnable1.Execute:=FALSE;
+//		MC_ExtSetPointGenEnable2.Execute:=FALSE;
+//		MC_ExtSetPointGenEnable3.Execute:=FALSE;
+//		MC_ExtSetPointGenEnable4.Execute:=FALSE;
+//		MC_ExtSetPointGenDisable1.Execute := MC_ExtSetPointGenEnable1.Enabled;	
+//		MC_ExtSetPointGenDisable2.Execute := MC_ExtSetPointGenEnable2.Enabled;
+//		MC_ExtSetPointGenDisable3.Execute := MC_ExtSetPointGenEnable3.Enabled;
+//		MC_ExtSetPointGenDisable4.Execute := MC_ExtSetPointGenEnable4.Enabled;	
+//		IF NOT AXIS.axis1.Status.Coupled AND AXIS.axis2.Status.Coupled AND AXIS.axis3.Status.Coupled AND AXIS.axis4.Status.Coupled THEN
+//			IF AXIS.axis1.Status.Error AND AXIS.axis2.Status.Error AND AXIS.axis3.Status.Error AND AXIS.axis4.Status.Error THEN
+//				CASE_STATE1 := ENUM_RESET;	
+//			ELSE
+//				CASE_STATE1 := ENUM_INIT_0;
+//			END_IF
+//		END_IF
+	
+//	ENUM_RESET:
+//		RESET_Execute1 := TRUE;
+//		RESET_Execute2 := TRUE;
+//		RESET_Execute3 := TRUE;
+//		RESET_Execute4 := TRUE;
+//		RESET();
+//		MC_ExtSetPointGenDisable1.Execute:=FALSE;
+//		MC_ExtSetPointGenDisable2.Execute:=FALSE;
+//		MC_ExtSetPointGenDisable3.Execute:=FALSE;
+//		MC_ExtSetPointGenDisable4.Execute:=FALSE;		
+//			IF RESET.MC_Reset1.Done AND RESET.MC_Reset2.Done AND RESET.MC_Reset3.Done AND RESET.MC_Reset4.Done THEN
+//				CASE_STATE1 := ENUM_INIT_0;
+//			ELSIF RESET.MC_Reset1.Error AND RESET.MC_Reset2.Error AND RESET.MC_Reset3.Error AND RESET.MC_Reset4.Error THEN
+//				CASE_STATE1 := ENUM_INIT_0; 
+//			END_IF
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="SetPointGeneration">
+      <LineId Id="311" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="350" Count="77" />
+      <LineId Id="78" Count="1" />
+      <LineId Id="428" Count="0" />
+      <LineId Id="94" Count="3" />
+      <LineId Id="227" Count="2" />
+      <LineId Id="98" Count="0" />
+      <LineId Id="230" Count="2" />
+      <LineId Id="99" Count="7" />
+      <LineId Id="336" Count="13" />
+      <LineId Id="115" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="28" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

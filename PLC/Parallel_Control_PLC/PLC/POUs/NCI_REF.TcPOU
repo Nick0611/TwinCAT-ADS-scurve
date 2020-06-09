@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <POU Name="NCI_REF" Id="{01579470-34d7-42f5-bfd8-dcb7485817e0}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK NCI_REF
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	PlcToNci AT %Q* : PLCTONC_NCICHANNEL_REF;
+	NciToPlc AT %I* : NcToPlc_NciChannel_Ref;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <LineIds Name="NCI_REF">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

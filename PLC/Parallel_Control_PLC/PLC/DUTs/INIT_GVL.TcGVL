@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <GVL Name="INIT_GVL" Id="{eb7b0bf5-2e7f-4ee9-9725-974a11e67728}">
+    <Declaration><![CDATA[
+VAR_GLOBAL
+	INIT_Execute1 : BOOL;
+	INIT_Execute2 : BOOL;
+	INIT_Execute3 : BOOL;
+	INIT_Execute4 : BOOL;
+	INIT_Execute5 : BOOL;
+	INIT_Execute6 : BOOL;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

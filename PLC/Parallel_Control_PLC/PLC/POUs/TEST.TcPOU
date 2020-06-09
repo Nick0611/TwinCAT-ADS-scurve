@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <POU Name="TEST" Id="{43bf10ca-c042-4a96-86d0-577d363b2543}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM TEST
+VAR
+	TEST_STATE1:TEST_STATE;
+	j: INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE TEST_STATE1 OF
+	TEST_0:
+		j:=10;
+		TEST_STATE1:=TEST_1;
+	TEST_1:
+		j:=j+10;
+END_CASE]]></ST>
+    </Implementation>
+    <LineIds Name="TEST">
+      <LineId Id="6" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="8" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

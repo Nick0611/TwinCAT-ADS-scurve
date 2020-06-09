@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <DUT Name="NCI_SingleEntry" Id="{1f2fa227-9158-4f3f-afd9-bedb8f2d9ebe}">
+    <Declaration><![CDATA[TYPE NCI_SingleEntry :
+STRUCT
+	SyncVelo:REAL;
+	SyncAcc:REAL;
+	fX:REAL;
+	fY:REAL;
+	fZ:REAL;
+	
+	fQ1:REAL;
+	fQ2:REAL;
+	
+	fCenterX:REAL;
+	fCenterY:REAL;
+	fCenterZ:REAL;
+	iPlane:REAL;
+	
+	Reserve1:UDINT;
+	Reserve2:UDINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <DUT Name="CASE_MODE" Id="{3b3ec48e-5122-4d30-b0d6-6a6607f4c3cb}">
+    <Declaration><![CDATA[
+TYPE CASE_MODE :
+(
+	DEFAULT := 0,
+	Set_PointGeneration,
+	Set_Vel
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

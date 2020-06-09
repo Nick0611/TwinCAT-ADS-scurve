@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <GVL Name="POWER_GVL" Id="{8f4928b4-451a-43f0-92be-5c652e76f3e4}">
+    <Declaration><![CDATA[
+VAR_GLOBAL
+	POWER_Enable1 : BOOL;
+	POWER_Enable2 : BOOL;
+	POWER_Enable3 : BOOL;
+	POWER_Enable4 : BOOL;
+	POWER_Enable5 : BOOL;
+	POWER_Enable6 : BOOL;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

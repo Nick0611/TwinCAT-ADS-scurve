@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <POU Name="PRG_MC_FeedTable" Id="{234c8819-d084-449e-a068-7341e44b5f04}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PRG_MC_FeedTable
+VAR
+	(*NCI 通道的 Axis 和 Channel ，与 TwinCAT NC 的接口变量*)
+AxisX :AXIS_REF;
+AxisY :AXIS_REF;
+ItpChannel :NCI_REF;
+(*基本动作功能块：通道组合，通道解散，装载 G 代码文件，启动停止，复位*)
+CfgBuildExt3DGroup : CfgBuildExt3DGroup;
+fbClearGrp :CfgReconfigGroup; 
+fbItpStartStop :ItpStartStop;
+fbItpReset :ItpResetEx2;
+TblPrep : FB_NciFeedTablePreparation;
+NCI_Entry : NCI_SingleEntry;
+(*自定义结构体：准备赋给待填充指令 GeoCircleCIP 和 GeoLine 的数据*)
+GeoCircleCIP : ST_NciGeoCircleCIP;
+(*待填充到 Table 的圆弧插补指令*)
+GeoLine : ST_NciGeoLine;
+(*待填充到 Table 的直线插补指令*)
+NciFeedTable :FB_NciFeedTable;
+Table : ST_NciFeedGroupTable;
+(*插补通道要执行的插补指令序列*)
+TableDisplayIndex : UDINT := 1;
+(*插补指令在 Table 中的索引号*)
+rOverride :LREAL := 100;
+(*插补运动的倍率*)
+(*通道 ID 和轴组 ID*)
+GroupID : UDINT;
+ChannelID : UDINT;
+(*仅在数据准备的上升沿，才把 Entry 中的数据填充到 Table*)
+bTablePrepare :BOOL;
+fbRTrigTablePrepare :R_TRIG;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(*引用 4 个 Action ，实现不同的功能*)
+M_PTP(); (*轴使能*)
+M_BasicFB(); (*NCI 通道控制*)
+M_UpdateStatus(); (*NCI 通道状态刷新*)
+M_GoPLine(); (*数据填充*)
+
+(*准备手动控制 NC 通道的触发命令*)
+rOverride;
+CfgBuildExt3DGroup.bExecute;
+fbClearGrp.bExecute;
+fbItpReset.bExecute;
+NCI_Entry.fX;
+NCI_Entry.fY;
+NCI_Entry.SyncVelo;
+bTablePrepare;
+TblPrep.bResetTable;
+NciFeedTable.bExecute;
+
+]]></ST>
+    </Implementation>
+    <Action Name="M_BasicFB" Id="{35bea252-dfa8-461e-9fda-de09eb8cef9c}">
+      <Implementation>
+        <ST><![CDATA[CfgBuildExt3DGroup(
+bExecute:= ,
+nGroupId:=GroupID ,
+nXAxisId:=AxisX.NcToPlc.AxisId ,
+nYAxisId:=AxisY.NcToPlc.AxisId ,
+nZAxisId:=,
+nQ1AxisId:=,
+nQ2AxisId:=,
+tTimeOut:=T#500ms ,
+bBusy=> ,
+bErr=> ,
+nErrId=> );
+
+fbClearGrp(
+bExecute:= ,
+nGroupId:= GroupID ,
+tTimeOut:= T#500MS);
+
+fbItpStartStop(
+bStart:= ,
+bStop:= ,
+nChnId:=ChannelID,
+tTimeOut:=T#500MS ,
+bBusy=> ,
+bErr=> ,
+nErrId=> );
+
+fbItpReset(
+bExecute:= ,
+tTimeOut:= T#500MS,
+sNciToPlc:= ItpChannel.NciToPlc,
+bBusy=> ,
+bErr=> ,
+nErrId=> );
+
+TblPrep(
+nEntryType := ,
+pEntry := ,
+bResetTable:= ,
+stFeedGroupTable:= Table,
+nFilledRows=> ,
+bError => ,
+nErrorId => );
+
+NciFeedTable(
+bExecute:= ,
+bReset:= ,
+bLogFeederEntries:= FALSE ,
+stFeedGroupTable:= Table,
+stNciToPlc:=ItpChannel.NciToPlc );]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="M_GoPLine" Id="{8ed7d90e-b2f1-4ba7-abc3-8a863947857c}">
+      <Implementation>
+        <ST><![CDATA[fbRTrigTablePrepare(CLK:=bTablePrepare , Q=> );
+IF NOT fbRTrigTablePrepare.Q THEN RETURN; END_IF (* 仅当上升沿才往Table 里填一条数据*)
+IF NCI_Entry.SyncVelo >0.001 THEN
+IF NCI_Entry.iPlane>0 THEN (*Circle*)
+GeoCircleCIP.fEndPosX:= REAL_TO_LREAL(NCI_Entry.fX);
+GeoCircleCIP.fEndPosY:=  REAL_TO_LREAL(NCI_Entry.fY);
+GeoCircleCIP.fCIPPosX:=  REAL_TO_LREAL(NCI_Entry.fCenterX);
+GeoCircleCIP.fCIPPosY:=  REAL_TO_LREAL(NCI_Entry.fCenterY);
+GeoCircleCIP.fVelo:=  REAL_TO_LREAL(NCI_Entry.SyncVelo);
+TableDisplayIndex:=  TableDisplayIndex+1;
+GeoLine.nDisplayIndex := TableDisplayIndex;
+TblPrep.nEntryType:=  GeoCircleCIP.nEntryType;
+TblPrep.pEntry:=  ADR(GeoCircleCIP);
+TblPrep.bResetTable:=  FALSE;
+ELSE (*Line*)
+GeoLine.fEndPosX:=  REAL_TO_LREAL(NCI_Entry.fX);
+GeoLine.fEndPosY:=  REAL_TO_LREAL(NCI_Entry.fY);
+GeoLine.fEndPosZ:=  REAL_TO_LREAL(NCI_Entry.fZ);
+GeoLine.fEndPosQ1:=  REAL_TO_LREAL(NCI_Entry.fQ1);
+GeoLine.fEndPosQ2:=  REAL_TO_LREAL(NCI_Entry.fQ2);
+GeoLine.fVelo:=  REAL_TO_LREAL(NCI_Entry.SyncVelo);
+TableDisplayIndex:=  TableDisplayIndex+1;
+GeoLine.nDisplayIndex := TableDisplayIndex;
+TblPrep.nEntryType:=  GeoLine.nEntryType;
+TblPrep.pEntry:=  ADR(GeoLine);
+TblPrep.bResetTable:=  FALSE;
+END_IF
+END_IF]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="M_PTP" Id="{e3219c2b-d18a-4505-8a60-5675829c1bdf}">
+      <Implementation>
+        <ST><![CDATA[(*Enable, Enable Fw, EnbaleBw这三个 Bit 置 True*)
+AxisX.PlcToNc.ControlDWord:=7;
+AxisY.PlcToNc.ControlDWord:=7;
+(*设置 Override 为 100%, 保留小数点后 4 位的整数*)
+AxisX.PlcToNc.Override:=1000000;
+AxisX.PlcToNc.Override:=1000000;
+
+]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="M_UpdateStatus" Id="{42648e71-2463-40f2-b92b-24c54723240d}">
+      <Implementation>
+        <ST><![CDATA[(*设置 Override, 倍率*)
+ItpSetOverridePercent(
+fOverridePercent := rOverride,
+sPlcToNci :=ItpChannel.PlcToNci);
+(*获取 GroupI D*)
+GroupID := ItpGetGroupId(sNciToPlc:=ItpChannel.NciToPlc );
+ChannelID:=ItpGetChannelId(sNciToPlc:=ItpChannel.NciToPlc );]]></ST>
+      </Implementation>
+    </Action>
+    <LineIds Name="PRG_MC_FeedTable">
+      <LineId Id="52" Count="0" />
+      <LineId Id="54" Count="2" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="95" Count="10" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="49" Count="0" />
+    </LineIds>
+    <LineIds Name="PRG_MC_FeedTable.M_BasicFB">
+      <LineId Id="2" Count="11" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="14" Count="3" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="18" Count="6" />
+      <LineId Id="1" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="26" Count="6" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="33" Count="7" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="41" Count="4" />
+      <LineId Id="25" Count="0" />
+    </LineIds>
+    <LineIds Name="PRG_MC_FeedTable.M_GoPLine">
+      <LineId Id="2" Count="1" />
+      <LineId Id="5" Count="10" />
+      <LineId Id="4" Count="0" />
+      <LineId Id="17" Count="12" />
+      <LineId Id="16" Count="0" />
+    </LineIds>
+    <LineIds Name="PRG_MC_FeedTable.M_PTP">
+      <LineId Id="2" Count="0" />
+      <LineId Id="4" Count="0" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="1" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="11" Count="0" />
+    </LineIds>
+    <LineIds Name="PRG_MC_FeedTable.M_UpdateStatus">
+      <LineId Id="2" Count="0" />
+      <LineId Id="4" Count="3" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="1" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <DUT Name="TEST_STATE" Id="{9967c089-891a-477e-9ccf-bc43e37d3ca9}">
+    <Declaration><![CDATA[TYPE TEST_STATE :
+(
+	TEST_0 :=0,
+	TEST_1,
+	TEST_2,
+	TEST_3
+)INT;
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

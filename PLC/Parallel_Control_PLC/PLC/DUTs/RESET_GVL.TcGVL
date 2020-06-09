@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <GVL Name="RESET_GVL" Id="{72a0b2b0-e7a1-46e8-b15f-b3defe9310d9}">
+    <Declaration><![CDATA[
+VAR_GLOBAL
+	RESET_Execute1 : BOOL;
+	RESET_Execute2 : BOOL;
+	RESET_Execute3 : BOOL;
+	RESET_Execute4 : BOOL;
+	RESET_Execute5 : BOOL;
+	RESET_Execute6 : BOOL;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <POU Name="INIT" Id="{5b8a4dc9-f9fa-493c-8b10-dafd47b6e3d9}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM INIT
+VAR
+	MC_MoveAbsolute_1 : MC_MoveAbsolute;
+	MC_MoveAbsolute_2 : MC_MoveAbsolute;
+	MC_MoveAbsolute_3 : MC_MoveAbsolute;
+	MC_MoveAbsolute_4 : MC_MoveAbsolute;
+	MC_MoveAbsolute_5 : MC_MoveAbsolute;
+	MC_MoveAbsolute_6 : MC_MoveAbsolute;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[MC_MoveAbsolute_1(
+	Axis:= AXIS.Axis1, 
+	Execute:= INIT_Execute1, 
+	Position:= , 
+	Velocity:= , 
+	Acceleration:= , 
+	Deceleration:= , 
+	Jerk:= , 
+	BufferMode:= , 
+	Options:= , 
+	Done=> , 
+	Busy=> , 
+	Active=> , 
+	CommandAborted=> , 
+	Error=> , 
+	ErrorID=> );
+	
+MC_MoveAbsolute_2(
+	Axis:= AXIS.Axis2, 
+	Execute:= INIT_Execute2, 
+	Position:= , 
+	Velocity:= , 
+	Acceleration:= , 
+	Deceleration:= , 
+	Jerk:= , 
+	BufferMode:= , 
+	Options:= , 
+	Done=> , 
+	Busy=> , 
+	Active=> , 
+	CommandAborted=> , 
+	Error=> , 
+	ErrorID=> );
+	
+MC_MoveAbsolute_3(
+	Axis:= AXIS.Axis3, 
+	Execute:= INIT_Execute3, 
+	Position:= , 
+	Velocity:= , 
+	Acceleration:= , 
+	Deceleration:= , 
+	Jerk:= , 
+	BufferMode:= , 
+	Options:= , 
+	Done=> , 
+	Busy=> , 
+	Active=> , 
+	CommandAborted=> , 
+	Error=> , 
+	ErrorID=> );
+	
+MC_MoveAbsolute_4(
+	Axis:= AXIS.Axis4, 
+	Execute:= INIT_Execute4, 
+	Position:= , 
+	Velocity:= , 
+	Acceleration:= , 
+	Deceleration:= , 
+	Jerk:= , 
+	BufferMode:= , 
+	Options:= , 
+	Done=> , 
+	Busy=> , 
+	Active=> , 
+	CommandAborted=> , 
+	Error=> , 
+	ErrorID=> );
+	
+MC_MoveAbsolute_5(
+	Axis:= AXIS.Axis5, 
+	Execute:= INIT_Execute5, 
+	Position:= , 
+	Velocity:= , 
+	Acceleration:= , 
+	Deceleration:= , 
+	Jerk:= , 
+	BufferMode:= , 
+	Options:= , 
+	Done=> , 
+	Busy=> , 
+	Active=> , 
+	CommandAborted=> , 
+	Error=> , 
+	ErrorID=> );
+	
+MC_MoveAbsolute_6(
+	Axis:= AXIS.Axis6, 
+	Execute:= INIT_Execute6, 
+	Position:= , 
+	Velocity:= , 
+	Acceleration:= , 
+	Deceleration:= , 
+	Jerk:= , 
+	BufferMode:= , 
+	Options:= , 
+	Done=> , 
+	Busy=> , 
+	Active=> , 
+	CommandAborted=> , 
+	Error=> , 
+	ErrorID=> );]]></ST>
+    </Implementation>
+    <LineIds Name="INIT">
+      <LineId Id="10" Count="14" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="27" Count="14" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="44" Count="13" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="60" Count="13" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="118" Count="0" />
+      <LineId Id="87" Count="13" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="102" Count="0" />
+      <LineId Id="117" Count="0" />
+      <LineId Id="103" Count="13" />
+      <LineId Id="101" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

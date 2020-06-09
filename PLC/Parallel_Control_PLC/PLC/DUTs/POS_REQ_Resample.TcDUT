@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <DUT Name="POS_REQ_Resample" Id="{1d12e0f9-63e7-4de1-92c4-b8f464d7cb69}">
+    <Declaration><![CDATA[TYPE POS_REQ_Resample :
+STRUCT
+	POS_Resample: ARRAY[1..8,1..15] OF LREAL;
+	(*POS1: LREAL;
+	POS2: LREAL;
+	POS3: LREAL;
+	POS4: LREAL;
+	POS5: LREAL;
+	POS6: LREAL;*)
+
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

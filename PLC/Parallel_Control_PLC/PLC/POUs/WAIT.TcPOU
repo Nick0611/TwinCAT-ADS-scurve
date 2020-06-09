@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <POU Name="WAIT" Id="{1ccdcde2-6e0b-48d8-a4a4-5efac2b2af7d}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM WAIT
+VAR
+	TON1: TON;
+	WAIT_ENABLE: BOOL;
+	
+	count: INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+TON1(IN:= TRUE , PT:=T#1MS , Q=> , ET=> );
+IF TON1.Q THEN
+	TON1(in:= FALSE);
+	count := count + 1;
+END_IF
+//count := count + 1;
+]]></ST>
+    </Implementation>
+    <LineIds Name="WAIT">
+      <LineId Id="10" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="11" Count="1" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

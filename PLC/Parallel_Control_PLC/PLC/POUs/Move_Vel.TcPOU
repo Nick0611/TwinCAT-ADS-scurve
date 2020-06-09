@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <POU Name="Move_Vel" Id="{e60ff0ff-b7cb-4aa6-9273-e830ad3f72fc}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM Move_Vel
+VAR
+	MC_MoveVelocity5: MC_MoveVelocity;
+	MC_MoveVelocity6: MC_MoveVelocity;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+AXIS();
+
+MC_MoveVelocity5(
+	Axis:= AXIS.Axis5, 
+	Execute:= , 
+	Velocity:= MAIN.VEL_REQ1.VEL5, 
+	Acceleration:= , 
+	Deceleration:= , 
+	Jerk:= , 
+	Direction:= , 
+	BufferMode:= , 
+	Options:= , 
+	InVelocity=> , 
+	Busy=> , 
+	Active=> , 
+	CommandAborted=> , 
+	Error=> , 
+	ErrorID=> );
+MC_MoveVelocity6(
+	Axis:= AXIS.Axis6, 
+	Execute:= , 
+	Velocity:= MAIN.VEL_REQ1.VEL6, 
+	Acceleration:= , 
+	Deceleration:= , 
+	Jerk:= , 
+	Direction:= , 
+	BufferMode:= , 
+	Options:= , 
+	InVelocity=> , 
+	Busy=> , 
+	Active=> , 
+	CommandAborted=> , 
+	Error=> , 
+	ErrorID=> );]]></ST>
+    </Implementation>
+    <LineIds Name="Move_Vel">
+      <LineId Id="42" Count="0" />
+      <LineId Id="72" Count="0" />
+      <LineId Id="108" Count="0" />
+      <LineId Id="138" Count="30" />
+      <LineId Id="137" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

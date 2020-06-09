@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <GVL Name="McOutputs" Id="{0cfd9197-f640-40ea-a531-6b1f1dd7da89}">
+    <Declaration><![CDATA[
+VAR_GLOBAL
+	MC_Power_Outputs1: ST_McOutputs;
+	MC_Power_Outputs2: ST_McOutputs;
+	MC_Power_Outputs3: ST_McOutputs;
+	MC_Power_Outputs4: ST_McOutputs;
+	MC_Power_Outputs5: ST_McOutputs;
+	MC_Power_Outputs6: ST_McOutputs;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

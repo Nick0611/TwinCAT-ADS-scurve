@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <POU Name="POWER" Id="{27c3957e-14bf-43e2-90dd-82d4ecc4ca1c}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM POWER
+VAR
+	MC_Power_1: MC_Power;
+	MC_Power_2: MC_Power;
+	MC_Power_3: MC_Power;
+	MC_Power_4: MC_Power;
+	MC_Power_5: MC_Power;
+	MC_Power_6: MC_Power;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[MC_Power_1(
+	Axis:= AXIS.Axis1, 
+	Enable:= POWER_Enable1, 
+	Enable_Positive:= POWER_Enable1, 
+	Enable_Negative:= POWER_Enable1, 
+	Override:= , 
+	BufferMode:= , 
+	Options:= , 
+	Status=> MC_Power_Outputs1.Done, 
+	Busy=> MC_Power_Outputs1.Busy, 
+	Active=> MC_Power_Outputs1.Active, 
+	Error=> MC_Power_Outputs1.Error, 
+	ErrorID=> MC_Power_Outputs1.ErrorID);
+	
+MC_Power_2(
+	Axis:= AXIS.Axis2, 
+	Enable:= POWER_Enable2, 
+	Enable_Positive:= POWER_Enable2, 
+	Enable_Negative:= POWER_Enable2, 
+	Override:= , 
+	BufferMode:= , 
+	Options:= , 
+	Status=> MC_Power_Outputs2.Done, 
+	Busy=> MC_Power_Outputs2.Busy, 
+	Active=> MC_Power_Outputs2.Active, 
+	Error=> MC_Power_Outputs2.Error, 
+	ErrorID=> MC_Power_Outputs2.ErrorID);
+	
+MC_Power_3(
+	Axis:= AXIS.Axis3, 
+	Enable:= POWER_Enable3, 
+	Enable_Positive:= POWER_Enable3, 
+	Enable_Negative:= POWER_Enable3, 
+	Override:= , 
+	BufferMode:= , 
+	Options:= , 
+	Status=> MC_Power_Outputs3.Done, 
+	Busy=> MC_Power_Outputs3.Busy, 
+	Active=> MC_Power_Outputs3.Active, 
+	Error=> MC_Power_Outputs3.Error, 
+	ErrorID=> MC_Power_Outputs3.ErrorID);
+	
+MC_Power_4(
+	Axis:= AXIS.Axis4, 
+	Enable:= POWER_Enable4, 
+	Enable_Positive:= POWER_Enable4, 
+	Enable_Negative:= POWER_Enable4, 
+	Override:= , 
+	BufferMode:= , 
+	Options:= , 
+	Status=> MC_Power_Outputs4.Done, 
+	Busy=> MC_Power_Outputs4.Busy, 
+	Active=> MC_Power_Outputs4.Active, 
+	Error=> MC_Power_Outputs4.Error, 
+	ErrorID=> MC_Power_Outputs4.ErrorID);
+	
+MC_Power_5(
+	Axis:= AXIS.Axis5, 
+	Enable:= POWER_Enable5, 
+	Enable_Positive:= POWER_Enable5, 
+	Enable_Negative:= POWER_Enable5, 
+	Override:= , 
+	BufferMode:= , 
+	Options:= , 
+	Status=> MC_Power_Outputs5.Done, 
+	Busy=> MC_Power_Outputs5.Busy, 
+	Active=> MC_Power_Outputs5.Active, 
+	Error=> MC_Power_Outputs5.Error, 
+	ErrorID=> MC_Power_Outputs5.ErrorID);
+	
+MC_Power_6(
+	Axis:= AXIS.Axis6, 
+	Enable:= POWER_Enable6, 
+	Enable_Positive:= POWER_Enable6, 
+	Enable_Negative:= POWER_Enable6, 
+	Override:= , 
+	BufferMode:= , 
+	Options:= , 
+	Status=> MC_Power_Outputs6.Done, 
+	Busy=> MC_Power_Outputs6.Busy, 
+	Active=> MC_Power_Outputs6.Active, 
+	Error=> MC_Power_Outputs6.Error, 
+	ErrorID=> MC_Power_Outputs6.ErrorID);]]></ST>
+    </Implementation>
+    <LineIds Name="POWER">
+      <LineId Id="10" Count="11" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="24" Count="6" />
+      <LineId Id="68" Count="3" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="37" Count="6" />
+      <LineId Id="72" Count="3" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="50" Count="6" />
+      <LineId Id="76" Count="3" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="80" Count="0" />
+      <LineId Id="82" Count="11" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="104" Count="0" />
+      <LineId Id="106" Count="11" />
+      <LineId Id="105" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

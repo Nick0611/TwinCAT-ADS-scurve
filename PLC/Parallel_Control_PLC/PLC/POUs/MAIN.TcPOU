@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <POU Name="MAIN" Id="{c93fbe20-6080-4352-a0cc-960041af1240}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	//BOOL1 AT %MX0.0 :BOOL;
+	//INT2 AT %MD2 :INT;
+	//FLOAT1 AT %MD6:REAL;
+	//String1 : STRING;
+	//Array1 : ARRAY[0..9] OF INT;
+	//PLCVar:PLCStruct;
+	//ArrayS:ARRAY[0..9] OF PLCStruct;
+	//array2: ARRAY[1..50] OF LREAL:=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50];
+	//TON1: TON;	
+	//count: INT;
+	//CTU1: CTU;
+
+	CASE_MODE1 :CASE_MODE;
+	FillFlag AT %MX0.0: BOOL;
+	MoveDoneFlag AT %MX1.0: BOOL;
+	Move_Stop_Flag AT %MX2.0: BOOL;
+	Power_Flag AT %MX3.0: BOOL;
+	Init_Flag AT %MX12.0: BOOL;
+	NoPower_Flag AT %MX5.0: BOOL;
+	Reset_Flag AT %MX6.0: BOOL;
+	Continue_Flag AT %MX7.0: BOOL;
+	Mode_Flag AT %MD8: INT;
+	test1 AT %MX10.0: BOOL;
+	test2 AT %MX11.0: BOOL;
+	start_flag AT %MX9.0: BOOL;
+	set_pos_flag AT %MX13.0: BOOL;
+	err_flag AT %MX14.0: BOOL;
+	Init_Done_flag AT %MX15.0: BOOL;
+	MovePermit_Flag: BOOL;
+	POS1_temp: LREAL;
+	POS2_temp: LREAL;
+	POS3_temp: LREAL;
+	POS4_temp: LREAL;
+	Done1Flag: LREAL;
+	Done2Flag: LREAL;
+	Done3Flag: LREAL;
+	Done4Flag: LREAL;
+	i: INT;
+	x AT %MW2: INT;
+	POS_REQ :POS_REQ;
+	POS_RSP1 :POS_RSP;
+	VEL_RSP1 :VEL_RSP;
+	POS_REQ_Resample1:POS_REQ_Resample;	
+	VEL_REQ1 :VEL_REQ;
+	
+	j: INT;
+	m: INT;
+	fbGetCurTaskIdx  : GETCURTASKINDEX;
+    nLastExecTime       : UDINT;
+	init_done_1: BOOL;
+	init_done_2: BOOL;
+	init_done_3: BOOL;
+	init_done_4: BOOL;
+	init_done_5: BOOL;
+	init_done_6: BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//PRG_MC_FeedTable();
+AXIS();
+READ_POS();
+READ_VEL();
+//	IF AXIS.axis1.Status.Error AND AXIS.axis2.Status.Error AND AXIS.axis3.Status.Error AND AXIS.axis4.Status.Error THEN
+//		start_flag:=0;
+//	ELSE
+//		start_flag:=1;
+//	END_IF
+
+		IF 	Move_Stop_Flag THEN
+			MovePermit_Flag :=FALSE;
+		END_IF
+		IF Continue_Flag AND NOT err_flag THEN
+			Move_Stop_Flag:= 0;
+			MovePermit_Flag :=TRUE;
+			Continue_Flag:= 0;
+		END_IF
+		IF Init_Flag AND NOT err_flag THEN
+			POWER_Enable1:=TRUE; 
+			POWER_Enable2:=TRUE;
+			POWER_Enable3:=TRUE;
+			POWER_Enable4:=TRUE;
+			POWER();
+			IF MC_Power_Outputs1.Done  AND MC_Power_Outputs2.Done AND MC_Power_Outputs3.Done AND MC_Power_Outputs4.Done THEN
+				Power_Flag:= TRUE;
+				INIT.MC_MoveAbsolute_1(Axis:=AXIS.Axis1,Execute:=TRUE,Position:=0,Velocity:=300);
+				INIT.MC_MoveAbsolute_2(Axis:=AXIS.Axis2,Execute:=TRUE,Position:=0,Velocity:=300);
+				INIT.MC_MoveAbsolute_3(Axis:=AXIS.Axis3,Execute:=TRUE,Position:=0,Velocity:=300);
+				INIT.MC_MoveAbsolute_4(Axis:=AXIS.Axis4,Execute:=TRUE,Position:=0,Velocity:=300);
+				IF NOT INIT.MC_MoveAbsolute_1.busy THEN
+					init_done_1 := TRUE;
+				END_IF
+				IF NOT INIT.MC_MoveAbsolute_2.busy THEN
+					init_done_2 := TRUE;
+				END_IF
+				IF NOT INIT.MC_MoveAbsolute_3.busy THEN
+					init_done_3 := TRUE;
+				END_IF
+				IF NOT INIT.MC_MoveAbsolute_4.busy THEN
+					init_done_4 := TRUE;
+				END_IF
+				IF init_done_1 AND init_done_2 AND init_done_3 AND init_done_4 THEN
+					INIT.MC_MoveAbsolute_1(Axis:=AXIS.Axis1,Execute:=FALSE);
+					INIT.MC_MoveAbsolute_2(Axis:=AXIS.Axis2,Execute:=FALSE);
+					INIT.MC_MoveAbsolute_3(Axis:=AXIS.Axis3,Execute:=FALSE);
+					INIT.MC_MoveAbsolute_4(Axis:=AXIS.Axis4,Execute:=FALSE);
+					init_done_1 :=FALSE;
+					init_done_2 :=FALSE;
+					init_done_3 :=FALSE;
+					init_done_4 :=FALSE;
+					SetPointGeneration.MC_ExtSetPointGenEnable1(Axis:=AXIS.Axis1,Execute:=FALSE);	
+					SetPointGeneration.MC_ExtSetPointGenEnable2(Axis:=AXIS.Axis2,Execute:=FALSE);
+					SetPointGeneration.MC_ExtSetPointGenEnable3(Axis:=AXIS.Axis3,Execute:=FALSE);
+					SetPointGeneration.MC_ExtSetPointGenEnable4(Axis:=AXIS.Axis4,Execute:=FALSE);
+					SetPointGeneration.MC_ExtSetPointGenDisable1(Axis:=AXIS.Axis1,Execute:=FALSE);	
+					SetPointGeneration.MC_ExtSetPointGenDisable2(Axis:=AXIS.Axis2,Execute:=FALSE);
+					SetPointGeneration.MC_ExtSetPointGenDisable3(Axis:=AXIS.Axis3,Execute:=FALSE);
+					SetPointGeneration.MC_ExtSetPointGenDisable4(Axis:=AXIS.Axis4,Execute:=FALSE);
+					Init_Flag:= 0;
+					Power_Flag:= 0;
+					MovePermit_Flag:= 1;
+					Init_Done_flag:=1;
+				END_IF
+			END_IF
+			IF AXIS.axis1.Status.Error AND AXIS.axis2.Status.Error AND AXIS.axis3.Status.Error AND AXIS.axis4.Status.Error THEN
+				err_flag:=1;
+			END_IF					
+		END_IF
+		
+		IF set_pos_flag THEN
+			set_pos.MC_SetPosition1(axis:=axis.Axis1,execute:=FALSE,position:=0);
+			set_pos.MC_SetPosition2(axis:=axis.Axis2,execute:=FALSE,position:=0);
+			set_pos.MC_SetPosition3(axis:=axis.Axis3,execute:=FALSE,position:=0);
+			set_pos.MC_SetPosition4(axis:=axis.Axis4,execute:=FALSE,position:=0);
+			set_pos.MC_SetPosition1(axis:=axis.Axis1,execute:=TRUE,position:=0);
+			set_pos.MC_SetPosition2(axis:=axis.Axis2,execute:=TRUE,position:=0);
+			set_pos.MC_SetPosition3(axis:=axis.Axis3,execute:=TRUE,position:=0);
+			set_pos.MC_SetPosition4(axis:=axis.Axis4,execute:=TRUE,position:=0);
+			set_pos_flag:=0;
+		END_IF
+		
+		IF Reset_Flag THEN
+			SetPointGeneration.MC_ExtSetPointGenDisable1(Axis:=AXIS.Axis1,Execute:=TRUE);	
+			SetPointGeneration.MC_ExtSetPointGenDisable2(Axis:=AXIS.Axis2,Execute:=TRUE);
+			SetPointGeneration.MC_ExtSetPointGenDisable3(Axis:=AXIS.Axis3,Execute:=TRUE);
+			SetPointGeneration.MC_ExtSetPointGenDisable4(Axis:=AXIS.Axis4,Execute:=TRUE);
+			INIT.MC_MoveAbsolute_1(Axis:=AXIS.Axis1,Execute:=FALSE);
+			INIT.MC_MoveAbsolute_2(Axis:=AXIS.Axis2,Execute:=FALSE);
+			INIT.MC_MoveAbsolute_3(Axis:=AXIS.Axis3,Execute:=FALSE);
+			INIT.MC_MoveAbsolute_4(Axis:=AXIS.Axis4,Execute:=FALSE);
+			Init_Flag :=FALSE;
+			POWER_Enable1:=FALSE;
+			POWER_Enable2:=FALSE;
+			POWER_Enable3:=FALSE;
+			POWER_Enable4:=FALSE;
+			POWER();
+			Power_Flag :=0;
+			RESET.MC_Reset1(Axis:=AXIS.Axis1,Execute:=TRUE);
+			RESET.MC_Reset2(Axis:=AXIS.Axis2,Execute:=TRUE);
+			RESET.MC_Reset3(Axis:=AXIS.Axis3,Execute:=TRUE);
+			RESET.MC_Reset4(Axis:=AXIS.Axis4,Execute:=TRUE);
+			RESET.MC_Reset1(Axis:=AXIS.Axis1,Execute:=FALSE);
+			RESET.MC_Reset2(Axis:=AXIS.Axis2,Execute:=FALSE);
+			RESET.MC_Reset3(Axis:=AXIS.Axis3,Execute:=FALSE);
+			RESET.MC_Reset4(Axis:=AXIS.Axis4,Execute:=FALSE);
+			Reset_Flag:= 0;
+			Init_Done_flag:=0;
+			NoPower_Flag:= 0;
+			Move_Stop_Flag:= 0;
+			MovePermit_Flag:= 0;
+			start_flag:=0;
+		END_IF
+		IF NoPower_Flag AND NOT err_flag THEN
+			MovePermit_Flag:= 0;
+			Init_Flag:= 0;
+			NoPower_Flag:= FALSE;
+			POWER_Enable1:=FALSE;
+			POWER_Enable2:=FALSE;
+			POWER_Enable3:=FALSE;
+			POWER_Enable4:=FALSE;
+			POWER();
+	//IF SetPointGeneration.MC_Power_1_Outputs.Done AND SetPointGeneration.MC_Power_2_Outputs.Done AND SetPointGeneration.MC_Power_3_Outputs.Done AND SetPointGeneration.MC_Power_4_Outputs.Done THEN
+		
+	//END_IF	
+		END_IF
+		IF MovePermit_Flag AND NOT err_flag THEN
+			FillFlag:= FALSE;
+			IF MOve_Stop_Flag THEN
+				;
+			ELSE
+				i:= i+1;
+			END_IF
+
+			x:= i MOD 15;
+	
+			POS_RSP1.POS1:= AXIS.Axis1.NcToPlc.actPos;
+			POS_RSP1.POS2:= AXIS.Axis2.NcToPlc.actPos;
+			POS_RSP1.POS3:= AXIS.Axis3.NcToPlc.actPos;
+			POS_RSP1.POS4:= AXIS.Axis4.NcToPlc.actPos;
+			VEL_RSP1.VEL1:= AXIS.Axis1.NcToPlc.actVelo;
+			VEL_RSP1.VEL2:= AXIS.Axis2.NcToPlc.actVelo;
+			VEL_RSP1.VEL3:= AXIS.Axis3.NcToPlc.actVelo;
+			VEL_RSP1.VEL4:= AXIS.Axis4.NcToPlc.actVelo;
+			Done1Flag:=AXIS.Axis1.NcToPlc.actPos-POS1_temp;
+			Done2Flag:=AXIS.Axis2.NcToPlc.actPos-POS2_temp;
+			Done3Flag:=AXIS.Axis3.NcToPlc.actPos-POS3_temp;
+			Done4Flag:=AXIS.Axis4.NcToPlc.actPos-POS4_temp;
+
+			IF MOve_Stop_Flag = 0 AND ABS(Done1Flag)<1E-3 AND ABS(Done2Flag)<1E-3 AND ABS(Done3Flag)<1E-3 AND ABS(Done4Flag)<1E-3 THEN
+				MoveDoneFlag:= 1;
+			ELSE
+				MoveDoneFlag:= 0;
+			END_IF
+	
+			POS_REQ.POS1:= -POS_REQ_Resample1.POS_Resample[3,x+1];
+			POS_REQ.POS2:= -POS_REQ_Resample1.POS_Resample[4,x+1];
+			POS_REQ.POS3:= -POS_REQ_Resample1.POS_Resample[1,x+1];
+			POS_REQ.POS4:= -POS_REQ_Resample1.POS_Resample[2,x+1];
+			IF POS_REQ_Resample1.POS_Resample[7,x] = 1 THEN
+				POS1_temp:= POS_REQ.POS1;
+			END_IF
+			IF POS_REQ_Resample1.POS_Resample[8,x] = 1 THEN
+				POS2_temp:= POS_REQ.POS2;
+			END_IF
+			IF POS_REQ_Resample1.POS_Resample[5,x] = 1 THEN
+				POS3_temp:= POS_REQ.POS3;
+			END_IF
+			IF POS_REQ_Resample1.POS_Resample[6,x] = 1 THEN
+				POS4_temp:= POS_REQ.POS4;
+			END_IF
+
+		SetPointGeneration.MC_ExtSetPointGenEnable1(Axis:=AXIS.Axis1,Execute:=TRUE,Position:=POS_REQ.POS1);	
+		SetPointGeneration.MC_ExtSetPointGenEnable2(Axis:=AXIS.Axis2,Execute:=TRUE,Position:=POS_REQ.POS2);
+		SetPointGeneration.MC_ExtSetPointGenEnable3(Axis:=AXIS.Axis3,Execute:=TRUE,Position:=POS_REQ.POS3);
+		SetPointGeneration.MC_ExtSetPointGenEnable4(Axis:=AXIS.Axis4,Execute:=TRUE,Position:=POS_REQ.POS4);
+		IF SetPointGeneration.MC_ExtSetPointGenEnable1.Enabled AND  SetPointGeneration.MC_ExtSetPointGenEnable2.Enabled AND  SetPointGeneration.MC_ExtSetPointGenEnable3.Enabled AND  SetPointGeneration.MC_ExtSetPointGenEnable4.Enabled THEN
+			MC_ExtSetPointGenFeed(
+				Position:= MAIN.POS_REQ.POS1, 		
+				Velocity:= 1, 
+				Acceleration:=1 , 
+				Direction:= 1,
+				Axis:= AXIS.Axis1);	
+			MC_ExtSetPointGenFeed(
+				Position:= MAIN.POS_REQ.POS2, 		
+				Velocity:= 1, 
+				Acceleration:=1 , 
+				Direction:= 1,
+				Axis:= AXIS.Axis2);	
+			MC_ExtSetPointGenFeed(
+				Position:= MAIN.POS_REQ.POS3, 		
+				Velocity:= 1, 
+				Acceleration:=1 , 
+				Direction:= 1,
+				Axis:= AXIS.Axis3);	
+			MC_ExtSetPointGenFeed(
+				Position:= MAIN.POS_REQ.POS4, 		
+				Velocity:= 1, 
+				Acceleration:=1 , 
+				Direction:= 1,
+				Axis:= AXIS.Axis4);		
+				
+		END_IF
+		IF AXIS.axis1.Status.Error AND AXIS.axis2.Status.Error AND AXIS.axis3.Status.Error AND AXIS.axis4.Status.Error THEN
+			err_flag := 1;
+		END_IF
+	
+			IF x = 14 AND MOve_Stop_Flag = 0 THEN
+				FillFlag:= TRUE;
+		(*FOR m:= 1 TO 15 DO
+			POS_REQ_Resample1.POS_Resample[1,m]:=15*j+m;
+		END_FOR
+		j:= j+1;*)
+			END_IF
+	
+		END_IF
+		IF err_flag THEN
+			Reset_Flag:=1;
+			IF NOT AXIS.axis1.Status.Error AND NOT AXIS.axis2.Status.Error AND NOT AXIS.axis3.Status.Error AND NOT AXIS.axis4.Status.Error THEN
+				err_flag := 0;
+			END_IF
+		END_IF
+		
+fbGetCurTaskIdx();
+nLastExecTime := _TaskInfo[fbGetCurTaskIdx.index].LastExecTime;
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="54" Count="3" />
+      <LineId Id="1496" Count="3" />
+      <LineId Id="1495" Count="0" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="565" Count="2" />
+      <LineId Id="79" Count="1" />
+      <LineId Id="569" Count="0" />
+      <LineId Id="81" Count="1" />
+      <LineId Id="1501" Count="0" />
+      <LineId Id="1504" Count="3" />
+      <LineId Id="1502" Count="0" />
+      <LineId Id="1509" Count="1" />
+      <LineId Id="1458" Count="33" />
+      <LineId Id="1571" Count="0" />
+      <LineId Id="1492" Count="0" />
+      <LineId Id="1631" Count="0" />
+      <LineId Id="1457" Count="0" />
+      <LineId Id="1629" Count="0" />
+      <LineId Id="1455" Count="1" />
+      <LineId Id="1453" Count="0" />
+      <LineId Id="115" Count="0" />
+      <LineId Id="1493" Count="0" />
+      <LineId Id="1095" Count="0" />
+      <LineId Id="1098" Count="3" />
+      <LineId Id="1096" Count="0" />
+      <LineId Id="1102" Count="3" />
+      <LineId Id="1097" Count="0" />
+      <LineId Id="1494" Count="0" />
+      <LineId Id="116" Count="0" />
+      <LineId Id="514" Count="2" />
+      <LineId Id="513" Count="0" />
+      <LineId Id="444" Count="2" />
+      <LineId Id="443" Count="0" />
+      <LineId Id="447" Count="0" />
+      <LineId Id="439" Count="3" />
+      <LineId Id="438" Count="0" />
+      <LineId Id="1014" Count="0" />
+      <LineId Id="369" Count="6" />
+      <LineId Id="125" Count="0" />
+      <LineId Id="130" Count="0" />
+      <LineId Id="1632" Count="0" />
+      <LineId Id="131" Count="1" />
+      <LineId Id="734" Count="0" />
+      <LineId Id="733" Count="0" />
+      <LineId Id="133" Count="58" />
+      <LineId Id="663" Count="3" />
+      <LineId Id="312" Count="27" />
+      <LineId Id="1018" Count="1" />
+      <LineId Id="192" Count="0" />
+      <LineId Id="194" Count="9" />
+      <LineId Id="1032" Count="1" />
+      <LineId Id="1037" Count="1" />
+      <LineId Id="1036" Count="0" />
+      <LineId Id="1034" Count="1" />
+      <LineId Id="278" Count="1" />
+      <LineId Id="307" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <POU Name="READ_POS" Id="{ead86361-caf5-43c4-a7c8-e87af4056d28}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM READ_POS
+VAR
+	MC_ReadActualPosition1 : MC_ReadActualPosition;
+	MC_ReadActualPosition2 : MC_ReadActualPosition;
+	MC_ReadActualPosition3 : MC_ReadActualPosition;
+	MC_ReadActualPosition4 : MC_ReadActualPosition;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[MC_ReadActualPosition1(
+	Axis:= AXIS.Axis1, 
+	Enable:= , 
+	Valid=> , 
+	Busy=> , 
+	Error=> , 
+	ErrorID=> , 
+	Position=> );
+	
+MC_ReadActualPosition2(
+	Axis:= AXIS.Axis2, 
+	Enable:= , 
+	Valid=> , 
+	Busy=> , 
+	Error=> , 
+	ErrorID=> , 
+	Position=> );
+	
+MC_ReadActualPosition3(
+	Axis:= AXIS.Axis3, 
+	Enable:= , 
+	Valid=> , 
+	Busy=> , 
+	Error=> , 
+	ErrorID=> , 
+	Position=> );
+	
+MC_ReadActualPosition4(
+	Axis:= AXIS.Axis4, 
+	Enable:= , 
+	Valid=> , 
+	Busy=> , 
+	Error=> , 
+	ErrorID=> , 
+	Position=> );]]></ST>
+    </Implementation>
+    <LineIds Name="READ_POS">
+      <LineId Id="10" Count="6" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="19" Count="5" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="27" Count="5" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="35" Count="5" />
+      <LineId Id="33" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
